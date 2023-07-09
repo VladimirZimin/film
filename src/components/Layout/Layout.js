@@ -13,6 +13,9 @@ const Layout = () => {
           <Item>
             <StyledLink to="/movies">Фільми</StyledLink>
           </Item>
+          <Item>
+            <StyledLink to="/favorites">Обране</StyledLink>
+          </Item>
         </List>
       </header>
 

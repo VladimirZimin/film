@@ -11,7 +11,6 @@ const Home = () => {
   const [films, setFilms] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  console.log("error:", error);
 
   const location = useLocation();
 

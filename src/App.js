@@ -8,12 +8,14 @@ import Layout from "components/Layout/Layout";
 // import Cast from "components/Cast/Cast";
 // import Reviews from "components/Reviews/Reviews";
 import NotFound from "pages/NotFound/NotFound";
+import Favorites from "pages/Favorites/Favorites";
 
 const Home = lazy(() => import("pages/Home/Home"));
 const Movies = lazy(() => import("pages/Movies/Movies"));
 const MovieDetails = lazy(() => import("pages/MovieDetails/MovieDetails"));
 const Cast = lazy(() => import("components/Cast/Cast"));
 const Reviews = lazy(() => import("components/Reviews/Reviews"));
+const Trailer = lazy(() => import("components/Trailer/Trailer"));
 
 function App() {
   return (
@@ -25,9 +27,11 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/movies/:movieId" element={<MovieDetails />}>
+            <Route path="trailer" element={<Trailer />} />
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />
           </Route>
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

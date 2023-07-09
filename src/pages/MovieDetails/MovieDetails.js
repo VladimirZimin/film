@@ -9,7 +9,6 @@ const MovieDetails = () => {
   const [filmDetails, setFilmDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [trailerLink, setTrailerLink] = useState(null);
   const { movieId } = useParams();
   const location = useLocation();
   const backLinkLocationRef = useRef(location.state?.from ?? "/");
@@ -19,10 +18,9 @@ const MovieDetails = () => {
       try {
         setIsLoading(true);
         const film = await api.getMoviesDetails(movieId);
+        console.log("film:", film);
         setFilmDetails(film);
         setIsLoading(false);
-        const treiler = await api.fetchTrailersOfMovie(film.imdb_id);
-        setTrailerLink(treiler.data.linkEmbed);
       } catch (error) {
         setError(true);
         setIsLoading(false);
@@ -59,7 +57,7 @@ const MovieDetails = () => {
           <h1>
             {filmDetails.title} ({filmDetails.release_date.slice(0, 4)})
           </h1>
-          <a href={trailerLink}>Дивитися трейлер</a>
+
           <p>Рейтинг: {filmDetails.vote_average.toFixed(1)}</p>
           <p>Про фільм: {filmDetails.overview}</p>
           <p>
@@ -69,10 +67,17 @@ const MovieDetails = () => {
                 return <span key={genre.name}>{genre.name} </span>;
               })}
           </p>
+          <p>
+            <button type="button">Додати в обране</button>
+          </p>
           <div>
             <h2>Додаткова інформація</h2>
             <ul>
-              <li></li>
+              <li>
+                <h3>
+                  <StyledLink to="trailer">Дивитися трейлер</StyledLink>
+                </h3>
+              </li>
               <li>
                 <h3>
                   <StyledLink to="cast">Акторський склад</StyledLink>
