@@ -1,40 +1,87 @@
-import React, { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import Loader from "components/Loader/Loader";
+import React, { useRef } from "react";
 import { useParams } from "react-router-dom";
-import api from "services/api";
+import { useGetMovieTrailerQuery } from "redux/movies/moviesApi";
 
 const Trailer = () => {
-  const [trailerLink, setTrailerLink] = useState(null);
-  const [error, setError] = useState(false);
   const { movieId } = useParams();
+  const iframeRef = useRef(null);
 
-  useEffect(() => {
-    const fetchDetails = async () => {
-      try {
-        const film = await api.getMoviesDetails(movieId);
-        const treiler = await api.fetchTrailersOfMovie(film.imdb_id);
-        setTrailerLink(treiler.data.linkEmbed);
-      } catch (error) {
-        setError(true);
-        console.log(error);
-      }
-    };
-    fetchDetails();
-  }, [movieId]);
+  const {
+    data: trailers,
+    isLoading,
+    isError,
+  } = useGetMovieTrailerQuery(movieId);
 
   return (
-    <div>
-      <iframe
-        title="title"
-        src={trailerLink}
-        width="854"
-        height="480"
-        mozallowfullscreen="true"
-        webkitallowfullscreen="true"
-        frameBorder="no"
-        scrolling="no"
-      ></iframe>
-    </div>
+    <>
+      {!isError && isLoading ? (
+        <Loader />
+      ) : (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "15px",
+          }}
+        >
+          {trailers.results.map((trailer) => (
+            <Box
+              key={trailer.id}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                width: "700px",
+                height: "350px",
+              }}
+            >
+              <div>
+                <h2
+                  style={{
+                    textAlign: "center",
+                    marginBottom: "10px",
+                    color: "#ffffff",
+                  }}
+                >
+                  {trailer.name}
+                </h2>
+              </div>
+              <iframe
+                src={`https://www.youtube.com/embed/${trailer.key}`}
+                ref={iframeRef}
+                width="100%"
+                height="100%"
+                title="video"
+              ></iframe>
+            </Box>
+          ))}
+        </Box>
+      )}
+    </>
   );
 };
 
 export default Trailer;
+
+// const [isLoading, setIsLoading] = useState(false);
+// const [items, setItems] = useState([]);
+// const [error, setError] = useState(false);
+
+// useEffect(() => {
+//   const getTrailer = async () => {
+//     try {
+//       setIsLoading(true);
+//       const data = await api.getMovieTrailer(movieId);
+//       setItems(data.results);
+//       setIsLoading(false);
+//     } catch (error) {
+//       setError(true);
+//       setIsLoading(false);
+//       console.log(error);
+//     }
+//   };
+
+//   getTrailer();
+// }, [movieId]);
