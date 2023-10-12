@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Wrapper } from "./CardList.styled";
+import { useLocation } from "react-router-dom";
+import { CardLink, Wrapper } from "./CardList.styled";
 import Loader from "components/Loader/Loader";
 import NotFound from "components/NotFound/NotFound";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -34,15 +34,24 @@ const CardList = ({ useGetTrendingMovieDayQuery }) => {
                   <Card
                     sx={{ backgroundColor: "#252936", borderRadius: "8px" }}
                   >
-                    <Link to={`/movies/${film.id}`} state={{ from: location }}>
+                    <CardLink
+                      to={`/movies/${film.id}`}
+                      state={{ from: location }}
+                    >
                       {film.poster_path ? (
                         <ImageListItem>
-                          <img
-                            id={film.id}
-                            src={`${imgUrl}${film.poster_path}`}
-                            alt={film.title}
-                            loading="lazy"
-                          />
+                          <div
+                            style={{
+                              overflow: "hidden",
+                            }}
+                          >
+                            <img
+                              id={film.id}
+                              src={`${imgUrl}${film.poster_path}`}
+                              alt={film.title}
+                              loading="lazy"
+                            />
+                          </div>
                           <ImageListItemBar
                             position="below"
                             title={film.title}
@@ -95,7 +104,7 @@ const CardList = ({ useGetTrendingMovieDayQuery }) => {
                       ) : (
                         <NotFound />
                       )}
-                    </Link>
+                    </CardLink>
                   </Card>
                 </Grid>
               );

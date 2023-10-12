@@ -66,6 +66,8 @@ const Cast = () => {
             display: "flex",
             justifyContent: "center",
             gap: "10px",
+            marginTop: "20px",
+            marginBottom: "45px",
             width: "100%",
           }}
         >

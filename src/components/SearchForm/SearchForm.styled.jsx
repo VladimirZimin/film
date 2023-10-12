@@ -21,9 +21,7 @@ export const SearchIconWrapper = styled("div")`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px;
   height: 100%;
-  pointer-events: none;
   color: #7d7d7d;
 `;
 

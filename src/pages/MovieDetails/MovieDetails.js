@@ -22,7 +22,7 @@ import {
 } from "redux/movies/moviesApi";
 import { useSelector } from "react-redux";
 import { selectSessionId, selectUserId } from "redux/selectors";
-import { Box, Button, List, Paper, Stack } from "@mui/material";
+import { Box, Button, List, Paper, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 
 const MovieDetails = () => {
@@ -131,8 +131,8 @@ const MovieDetails = () => {
                   zIndex: -1,
                 }}
               ></div>
-              <Grid container="true" sx={{ mb: "35px" }}>
-                <Grid xs={4} mdOffset={1}>
+              <Grid container="true" sx={{ mb: "45px" }}>
+                <Grid xs={2.5} lg={4} xsOffset={1} lgOffset={0.5}>
                   <Box
                     container="true"
                     sx={{
@@ -215,7 +215,10 @@ const MovieDetails = () => {
                 </Grid>
 
                 <Grid
-                  xs={7}
+                  xs={11}
+                  lg={7}
+                  xsOffset={1}
+                  lgOffset={0}
                   sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -242,9 +245,18 @@ const MovieDetails = () => {
                       <p>Рейтинг: {data.vote_average.toFixed(1)}</p>
                     </Box>
 
-                    <h1 style={{ fontSize: "50px", marginBottom: "30px" }}>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        marginBottom: "30px",
+                        fontFamily:
+                          "system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji",
+                        fontSize: { xs: "25px", md: "50px" },
+                        lineHeight: { xs: "24px", md: "48px" },
+                      }}
+                    >
                       {data.title}
-                    </h1>
+                    </Typography>
                     <div style={{ marginBottom: "15px" }}>
                       <p
                         style={{

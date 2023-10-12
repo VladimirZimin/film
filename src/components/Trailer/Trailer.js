@@ -22,41 +22,51 @@ const Trailer = () => {
         <Box
           sx={{
             display: "flex",
+            // flexDirection: { xs: "column", md: "row" },
             justifyContent: "center",
+            // alignItems: "center",
+            flexWrap: "wrap",
             gap: "15px",
+            mt: "20px",
+            mb: "45px",
           }}
         >
-          {trailers.results.map((trailer) => (
-            <Box
-              key={trailer.id}
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                width: "700px",
-                height: "350px",
-              }}
-            >
-              <div>
-                <h2
-                  style={{
-                    textAlign: "center",
-                    marginBottom: "10px",
-                    color: "#ffffff",
-                  }}
-                >
-                  {trailer.name}
-                </h2>
-              </div>
-              <iframe
-                src={`https://www.youtube.com/embed/${trailer.key}`}
-                ref={iframeRef}
-                width="100%"
-                height="100%"
-                title="video"
-              ></iframe>
-            </Box>
-          ))}
+          {trailers.results.length === 0 ? (
+            <p style={{ fontSize: "20px" }}>Трейлер не знайдено</p>
+          ) : (
+            trailers.results.map((trailer) => (
+              <Box
+                key={trailer.id}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  width: "700px",
+                  height: "350px",
+                  mb: "25px",
+                }}
+              >
+                <div>
+                  <h2
+                    style={{
+                      textAlign: "center",
+                      marginBottom: "10px",
+                      color: "#ffffff",
+                    }}
+                  >
+                    {trailer.name}
+                  </h2>
+                </div>
+                <iframe
+                  src={`https://www.youtube.com/embed/${trailer.key}`}
+                  ref={iframeRef}
+                  width="100%"
+                  height="100%"
+                  title="video"
+                ></iframe>
+              </Box>
+            ))
+          )}
         </Box>
       )}
     </>

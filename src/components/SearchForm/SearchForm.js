@@ -8,6 +8,7 @@ import {
   StyledInputBase,
 } from "./SearchForm.styled";
 import { selectSearch } from "redux/selectors";
+import { IconButton, Stack } from "@mui/material";
 
 const SearchForm = () => {
   const dispatch = useDispatch();
@@ -29,14 +30,22 @@ const SearchForm = () => {
     <form onSubmit={handleSubmit}>
       <Search>
         <SearchIconWrapper>
-          <SearchIcon />
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={0}
+            sx={{ cursor: "pointer", zIndex: 99999 }}
+          >
+            <IconButton type="submit">
+              <SearchIcon style={{ color: "#7d7d7d" }} />
+            </IconButton>
+          </Stack>
         </SearchIconWrapper>
         <StyledInputBase
           placeholder="Пошук..."
           inputProps={{ "aria-label": "search" }}
           name="query"
         />
-        <button type="submit" className="visually-hidden"></button>
       </Search>
     </form>
   );

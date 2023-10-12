@@ -9,6 +9,7 @@ import { selectSearch } from "redux/selectors";
 import { alpha } from "@mui/material";
 import SearchForm from "components/SearchForm/SearchForm";
 import ProfileMenu from "components/ProfileMenu/ProfileMenu";
+import Footer from "components/Footer/Footer";
 
 const Layout = () => {
   const isSearch = useSelector(selectSearch);
@@ -44,6 +45,7 @@ const Layout = () => {
           <Outlet />
         </Suspense>
       </main>
+      <Footer />
     </>
   );
 };

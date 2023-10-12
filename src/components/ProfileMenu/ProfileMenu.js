@@ -62,7 +62,7 @@ const ProfileMenu = () => {
         variant="menu"
         sx={{
           mt: { xs: "50%", sm: "45px" },
-          ".css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper": {
+          ".MuiPaper-elevation": {
             width: { xs: "100%", sm: "200px" },
             height: { xs: "400px" },
             backgroundColor: alpha("#000000", 0.8),

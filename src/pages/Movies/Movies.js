@@ -48,7 +48,7 @@ const Movies = () => {
                             title={film.title}
                             subtitle={`
                             ${film.title} |
-                            ${film.release_date.slice(0, 4)}
+                            ${film.release_date?.slice(0, 4)}
                             `}
                             sx={{
                               px: "10px",
@@ -78,18 +78,18 @@ const Movies = () => {
                               borderRadius: "50%",
                               border: "3px solid red",
                               borderColor: () => {
-                                if (film.vote_average.toFixed(1) >= 7.5) {
+                                if (film.vote_average?.toFixed(1) >= 7.5) {
                                   return "#1ca240";
                                 } else if (
-                                  film.vote_average.toFixed(1) <= 7.4 &&
-                                  film.vote_average.toFixed(1) >= 6.1
+                                  film.vote_average?.toFixed(1) <= 7.4 &&
+                                  film.vote_average?.toFixed(1) >= 6.1
                                 ) {
                                   return "#FFFF00";
                                 }
                               },
                             }}
                           >
-                            <span>{film.vote_average.toFixed(1)}</span>
+                            <span>{film.vote_average?.toFixed(1)}</span>
                           </Box>
                         </ImageListItem>
                       ) : (
